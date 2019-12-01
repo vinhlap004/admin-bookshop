@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <title>admin</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Add Product - Dashboard HTML Template</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
@@ -71,7 +71,7 @@
             <li class="nav-item">
               <a class="nav-link" href="accounts">
                 <i class="far fa-user"></i>
-                Thông tin
+                Tài khoản
               </a>
             </li>
             <li class="nav-item dropdown">
@@ -79,20 +79,19 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog"></i>
                 <span>
-                  Settings <i class="fas fa-angle-down"></i>
+                  Thông tin<i class="fas fa-angle-down"></i>
                 </span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Billing</a>
-                <a class="dropdown-item" href="#">Customize</a>
+                <a class="dropdown-item" href="/login">Đăng nhập</a>
+                <a class="dropdown-item" href="/sign-up">Đăng ký</a>
               </div>
             </li>
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link d-block" href="login">
-                Long, <b>Đăng xuất</b>
+                <b>Đăng xuất</b>
               </a>
             </li>
           </ul>
@@ -112,6 +111,7 @@
       </p>
     </div>
   </footer>
+  <script src="js/tooplate-scripts.js"></script>
 </body>
 
 </html>

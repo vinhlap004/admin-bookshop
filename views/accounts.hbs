@@ -2,15 +2,40 @@
         <div class="row tm-content-row">
           <div class="col-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <h2 class="tm-block-title">Danh sách tài khoản</h2>
-              <p class="text-white">Tài khoản</p>
-              <select class="custom-select">
+              <h2 class="tm-block-title">Chào {{user}}!</h2>
+              <p class="text-white">Danh sách các tài khoản</p>
+              <!-- <select class="custom-select">
                 <option value="0">chọn tài khoản</option>
+                
                 <option value="1">Nguyễn Văn A</option>
                 <option value="2">Nguyễn Văn B</option>
                 <option value="3">Nguyễn Văn C</option>
                 <option value="4">Nguyễn Văn D</option>
-              </select>
+              </select> -->
+
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{# each admin}}
+                  <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.type}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
