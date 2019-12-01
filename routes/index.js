@@ -19,6 +19,8 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {ti
 router.post('/login', passport.authenticate('local', {
 	successRedirect: '/',
 	failureRedirect: '/login',
+	badRequestMessage: 'Bạn chưa điền đủ',
+	//nếu ko có sẽ mặc định hiện "Missing credentials" khi nhập thiếu
 	failureFlash: true
 }));
 
