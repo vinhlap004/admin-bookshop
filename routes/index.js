@@ -4,86 +4,37 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 const admins =require('../model/admins.model');
-const { forwardAuthenticated } = require('../config/auth');
-
-/*//1.require mongoose
-const mongoose = require('mongoose');
-
-//2.connect
-if (mongoose.connect('mongodb+srv://linh796:linh796@cluster0-lbsr0.mongodb.net/bookshop?retryWrites=true&w=majority')){
-	console.log('connected to database\n');
-}
-
-//3.tạo Schema
-const adminsSchema = new mongoose.Schema({
-	name: String,
-	email: String,
-	password: String,
-	phone: String,
-	address: String,
-	type:Number,
-	img: String
-}, {collection: 'admins'});
-
-//4.tạo model
-const admins = mongoose.model('admins', adminsSchema);
-*/
-
-//midleware.
-function ensureAuthenticated(req, res, next) {
-	if (req.isAuthenticated()) {
-    // req.user is available for use here
-    return next(); }
-
-  // denied. redirect to login
-  res.redirect('/login')
-};
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 /* GET home page. */
 router.get('/', ensureAuthenticated, function(req, res, next) {
 	res.render('index', {title : 'Trang chủ', user: req.user});
 });
 
-var redirestRegistered = 0;
-
 // /* GET login page. */
-// router.get('/login', function(req, res, next) {
-// 	res.render('login', {title : 'Đăng nhập'});
-// });
-
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {title : 'Đăng nhập'}));
 
 
 // Post login
-router.post('/login', (req, res, next) => {
-	passport.authenticate('local', {
-		successRedirect: '/',
-		failureRedirect: '/login',
-		failureFlash: true
-	})(req, res, next);
-});
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login',
+	failureFlash: true
+}));
 
 /* GET account page. */
-// router.get('/accounts', ensureAuthenticated, (req, res) => {
-// 	admins.find()
-// 	.then(function (doc) {
-// 		res.render('accounts', { title : 'Tài khoản', admin: doc, user: req.user});
-// 	});
-// });
-
-
-router.get('/accounts', ensureAuthenticated, (req, res) =>
-	res.render('accounts', {
-		user: req.user
-	})
-);
+router.get('/accounts', ensureAuthenticated, (req, res) =>{
+	admins.find()
+	.then(function(admin){
+		res.render('accounts', {
+			admins: admin,
+			user: req.user
+		});
+	});
+});
 
 
 /* GET sign up page. */
-// router.get('/sign-up', function(req, res, next) {
-// 	res.render('sign-up', {title : 'Đăng ký'});
-// });
-
 router.get('/sign-up', forwardAuthenticated, (req, res) => res.render('sign-up', {title : 'Đăng ký'}));
 
 // POST sign up.
@@ -147,8 +98,7 @@ router.post('/insert', function (req, res, next) {
 						//save admin
 						newAdmin.save()
 						.then(admin => {
-							redirestRegistered ++;// Trigger register completed alert
-							//req.flash('success_msg', 'Bạn đã đăng kí thành công hãy đăng nhập');
+							req.flash('success_msg', 'Bạn đã đăng kí thành công hãy đăng nhập');
 							res.redirect('/login');
 						})
 						.catch(er => console.log(er));
