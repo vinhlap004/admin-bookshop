@@ -29,6 +29,7 @@ router.get('/accounts', ensureAuthenticated, (req, res) =>{
 	admins.find()
 	.then(function(admin){
 		res.render('accounts', {
+			title : 'Tài khoản',
 			admins: admin,
 			user: req.user
 		});
@@ -47,6 +48,10 @@ router.post('/insert', function (req, res, next) {
 	if (!name || !email || ! password || !password1 || !phone || !address||!type) {
 		err.push({msg: 'Bạn chưa điền hết thông tin yêu cầu'});
 		console.log(err);
+	} 
+	//check email 
+	if (email.search("@") == -1) {
+		err.push({msg: 'Email phải có ký tự "@"'});
 	} 
 	//check password match
 	if (password !== password1) {
