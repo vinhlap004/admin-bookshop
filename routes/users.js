@@ -129,7 +129,7 @@ router.post('/update', function (req, res, next) {
 	//console.log("email old"+user.email);
 
 	//check requied fields 
-	if (!name || !email || ! password || !phone || !address ||!type) {
+	if (!name || !email || !password || !phone || !address ||!type) {
 		err.push({msg: 'Bạn chưa điền hết thông tin yêu cầu!'});
 		console.log(err);
 	} 
@@ -200,20 +200,13 @@ router.post('/update', function (req, res, next) {
        	 				user.phone = phone; 
        	 				user.address = address; 
        	 				user.type = type ;
-       	 				bcrypt.genSalt(10, (er, salt) => {
-       	 					bcrypt.hash(password, salt, (er, hash) => {
-       	 						if (er) throw er;
-									//set password to hashed
-									user.password = hash;
-								//save admin
-								user.save()
-								.then(admin => {
-									req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
-									res.redirect('/accounts');
-								})
-								.catch(er => console.log(er));
-							});
-       	 				});
+       	 				//bỏ qua password
+       	 				user.save()
+       	 				.then(admin => {
+       	 					req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
+       	 					res.redirect('/accounts');
+       	 				})
+       	 				.catch(er => console.log(er));
        	 			}
        	 		});
        	 	}
@@ -224,94 +217,93 @@ router.post('/update', function (req, res, next) {
 	if ( (!password1 && password2) || (!password2 && password1) ) {
 		err.push({msg: 'Nếu bạn muốn đổi mật khẩu thì phải nhập đủ tất cả thông tin yêu cầu!'});
 	}
-	else if( password2 && password1)
-	{
-	//check password match
-	if (password === password1) {
-		err.push({msg: 'Mật khẩu mới phải khác mật khẩu hiện tại!'});
-	}
-	//check password length
-	if (password1.length < 7) {
-		err.push({msg: 'Mật khẩu mới phải trên 6 ký tự!'});
-	} 
-	//check password2 match password1
-	if (password2 !== password1) {
-		err.push({msg: 'Mật khẩu mới nhập lại không đúng!'});
-	}
-	if (err.length > 0) {
-		res.render('accounts', {
-			//save data khi nhập sai
-			err,
-			name, 
-			email,
-			phone, 
-			address, 
-			type
-		});
-	} 
+	else if( password2 && password1){
+		//check password match
+		if (password === password1) {
+			err.push({msg: 'Mật khẩu mới phải khác mật khẩu hiện tại!'});
+		}
+		//check password length
+		if (password1.length < 7) {
+			err.push({msg: 'Mật khẩu mới phải trên 6 ký tự!'});
+		} 
+		//check password2 match password1
+		if (password2 !== password1) {
+			err.push({msg: 'Mật khẩu mới nhập lại không đúng!'});
+		}
+		if (err.length > 0) {
+			res.render('accounts', {
+				//save data khi nhập sai
+				err,
+				name, 
+				email,
+				phone, 
+				address, 
+				type
+			});
+		} 
 
-	else {
-		//validation
-		//check password hiện tại
-		admins.findOne({email: user.email})
-		.then(check_email => {
-			//nếu email khác với email trong local mà khi kiểm tra nó thấy tồn tại trong database thì email đó đã tồn tại 
-			if (email !== user.eamil && check_email) {
-				err.push({ msg: 'Email đã tồn tại!' });
-			}
-			if (err.length > 0) {
-				res.render('accounts', {
-					//save data khi nhập sai
-					err,
-					name, 
-					email,
-					phone, 
-					address, 
-					type
-				});
-			}
-			else{
+		else {
+			//validation
+			//check password hiện tại
+			admins.findOne({email: user.email})
+			.then(check_email => {
+				//nếu email khác với email trong local mà khi kiểm tra nó thấy tồn tại trong database thì email đó đã tồn tại 
+				if (email !== user.eamil && check_email) {
+					err.push({ msg: 'Email đã tồn tại!' });
+				}
+				if (err.length > 0) {
+					res.render('accounts', {
+						//save data khi nhập sai
+						err,
+						name, 
+						email,
+						phone, 
+						address, 
+						type
+					});
+				}
+				else{
 
-       	 		// Match password
-       	 		bcrypt.compare(password, user.password, (err1, isMatch) => {
-       	 			if (err1) throw err1;
-       	 			if (!isMatch) {
-       	 				err.push({msg: 'Mật khẩu không đúng!'});
-       	 				res.render('accounts', {
-							//save data khi nhập sai
-							err,
-							name,
-							email,
-							phone, 
-							address, 
-							type
-						});
-       	 			} else {
-       	 				user.name = name;
-       	 				user.email = email;
-       	 				user.phone = phone; 
-       	 				user.address = address; 
-       	 				user.type = type ;
-       	 				bcrypt.genSalt(10, (er, salt) => {
-       	 					bcrypt.hash(password1, salt, (er, hash) => {
-       	 						if (er) throw er;
-									//set password1 to hashed
-									user.password = hash;
-								//save admin
-								user.save()
-								.then(admin => {
-									req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
-									res.redirect('/accounts');
-								})
-								.catch(er => console.log(er));
+       	 			// Match password
+       	 			bcrypt.compare(password, user.password, (err1, isMatch) => {
+       	 				if (err1) throw err1;
+       	 				if (!isMatch) {
+       	 					err.push({msg: 'Mật khẩu không đúng!'});
+       	 					res.render('accounts', {
+								//save data khi nhập sai
+								err,
+								name,
+								email,
+								phone, 
+								address, 
+								type
 							});
-       	 				});
-       	 			}
-       	 		});
-       	 	}
-       	 });
+       	 				} else {
+       	 					user.name = name;
+       	 					user.email = email;
+       	 					user.phone = phone; 
+       	 					user.address = address; 
+       	 					user.type = type ;
+       	 					bcrypt.genSalt(10, (er, salt) => {
+       	 						bcrypt.hash(password1, salt, (er, hash) => {
+       	 							if (er) throw er;
+										//set password to hashed
+										user.password = hash;
+									//save admin
+									user.save()
+									.then(admin => {
+										req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
+										res.redirect('/accounts');
+									})
+									.catch(er => console.log(er));
+								});
+       	 					});
+       	 				}
+       	 			});
+       	 		}
+       	 	});
+		}
 	}
-}
 });
 
 // Logout
