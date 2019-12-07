@@ -6,8 +6,6 @@ const passport = require('passport');
 const admins =require('../model/admins.model');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
-let checkin=0;
-
 // /* GET login page. */
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {title : 'Đăng nhập'}));
 

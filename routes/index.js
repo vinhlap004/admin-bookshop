@@ -11,9 +11,24 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
 	res.render('index', {title : 'Trang chủ', user: req.user});
 });
 
+
+const products =require('../model/products.model');
+const categories =require('../model/categories.model');
+const publishers =require('../model/publishers.model');
+
+
 /* GET products page. */
 router.get('/products', function(req, res, next) {
-	res.render('products', {title : 'Danh sách sản phẩm'});
+	categories.find()
+	.then(function (category) {
+		publishers.find()
+		.then(function (publisher) {
+			products.find().sort('title')
+			.then(function (product) {
+				res.render('products', {categories: category, publish: publisher, items: product, title : 'Danh sách sản phẩm'});
+			});
+		});        
+	});
 });
 
 /* GET add-product page. */
@@ -25,6 +40,26 @@ router.get('/add-product', function(req, res, next) {
 router.get('/edit-product', function(req, res, next) {
 	res.render('edit-product', {title : 'Chỉnh sửa sản phẩm'});
 });
+
+
+// /* GET products page. */
+// router.get('/products', function(req, res, next) {
+// 	res.render('products', {title : 'Danh sách sản phẩm'});
+// });
+
+// /* GET add-product page. */
+// router.get('/add-product', function(req, res, next) {
+// 	res.render('add-product', {title : 'Thêm sản phẩm mới'});
+// });
+
+// /* GET edit-product page. */
+// router.get('/edit-product', function(req, res, next) {
+// 	res.render('edit-product', {title : 'Chỉnh sửa sản phẩm'});
+// });
+
+
+
+
 
 /* GET day page. */
 router.get('/day', function(req, res, next) {
