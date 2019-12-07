@@ -1,112 +1,107 @@
-      <div class="container mt-5">
-        <div class="row tm-content-row">
-          <div class="col-12 tm-block-col">
-              <h1 class="tm-block-title text-center" style="font-size:50px;">Đăng nhập</h1>
-          </div>
+<div class="container mt-5">
+  <div class="row tm-content-row">
+    <div class="col-12 tm-block-col">
+      <h1 class="tm-block-title text-center" style="font-size:50px;">Đăng nhập</h1>
+    </div>
+  </div>
+  <!-- row -->
+  <div class="row tm-content-row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="tm-bg-primary-dark tm-block tm-block-settings">
+        <!-- success msg -->
+        <!-- if success msg exists -->
+        {{#if success_msg}}
+        <!-- show success msg -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{success_msg}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- row -->
-        <div class="row tm-content-row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <div class="tm-bg-primary-dark tm-block tm-block-settings">
-
-<!-- success msg -->
-  <!-- if success msg exists -->
-              {{#if success_msg}}
-      <!-- show success msg -->
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h1 style="font-size:20px;">{{success_msg}}</h1>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-              {{/if}}
-<!-- end success msg -->
-
-
-<!-- error msg -->
-  <!-- if err exists -->
-              {{#if error_msg }}
-      <!-- show error_msg  -->
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <h1 style="font-size:20px;">{{error_msg}}</h1>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-              {{/if}}
-<!-- end error msg -->
-
-<!-- error -->
-  <!-- if err exists -->
-              {{#if error }}
-      <!-- show error  -->
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <h1 style="font-size:20px;">{{error}}</h1>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-              {{/if}}
-<!-- end error -->
-              <br>
-
-              <form 
-                action="/login" 
-                method="POST"
-                class="tm-signup-form row"
-              >
-                <div class="form-group col-lg-12">
-                  <label for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="text"
-                    class="form-control validate"
-                    placeholder=""
-                  />
-                </div>
-                <div class="form-group col-lg-12">
-                  <label for="password">Mật khẩu</label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="form-control validate"
-                    placeholder=""
-                  />
-                </div>
-                <div class="form-group col-lg-12">
-                  <label class="forget-pass">
-                    <a href="/forget-password">
-                      Quên mật khẩu?
-                    </a>
-                  </label>
-                </div>
-                <div class="col-4"></div>
-                <div class="col-4">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                    id="login"
-                  >
-                    Đăng nhập
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="col-2"></div>
+        {{/if}}
+        <!-- end success msg -->
+        <!-- error msg -->
+        <!-- if err exists -->
+        {{#if error_msg }}
+        <!-- show error_msg  -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{error_msg}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>    
-      <script>
-        const id = document.getElementById("email");
-        const btnLogin  = document.getElementById("login");
-        btnLogin.onclick = function(){
-          location.href = id.value
-        }
-      </script>
-      <script src="js/jquery-3.3.1.min.js"></script>
-      <!-- https://jquery.com/download/ -->
-      <script src="js/bootstrap.min.js"></script>
-      <!-- https://getbootstrap.com/ -->
+        {{/if}}
+        <!-- end error msg -->
+        <!-- error -->
+        <!-- if err exists -->
+        {{#if error }}
+        <!-- show error  -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{error}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {{/if}}
+        <!-- end error -->
+        <br>
+        <form 
+        action="/login" 
+        method="POST"
+        class="tm-signup-form row"
+        >
+        <div class="form-group col-lg-12">
+          <label for="email">Email</label>
+          <input
+          id="email"
+          name="email"
+          type="text"
+          class="form-control validate"
+          placeholder=""
+          />
+        </div>
+        <div class="form-group col-lg-12">
+          <label for="password">Mật khẩu</label>
+          <input
+          id="password"
+          name="password"
+          type="password"
+          class="form-control validate"
+          placeholder=""
+          />
+        </div>
+        <div class="form-group col-lg-12">
+          <label class="forget-pass">
+            <a href="/forget-password">
+              Quên mật khẩu?
+            </a>
+          </label>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <button
+          type="submit"
+          class="btn btn-primary btn-block text-uppercase"
+          id="login"
+          >
+          Đăng nhập
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-2"></div>
+</div>
+</div>    
+<script>
+  const id = document.getElementById("email");
+  const btnLogin  = document.getElementById("login");
+  btnLogin.onclick = function(){
+    location.href = id.value
+  }
+</script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->

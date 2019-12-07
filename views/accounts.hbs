@@ -1,158 +1,210 @@
 <div class="container mt-5">
-        <div class="row tm-content-row">
-          <div class="col-12 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <p class="text-white">Danh sách các tài khoản</p>
-              
-<!-- only admin type 1 can see -->
-              <select class="custom-select">
-                <option value="0">chọn tài khoản</option>
-                {{# each admins}}
-                <option value="{{this.id}}">{{{this.name}}}</option>
-                {{/each}}
-              </select> 
-              
-              <hr>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{# each admins}}
-                  <tr>
-                    <td>{{this.name}}</td>
-                    <td>{{this.email}}</td>
-                    <td>{{this.phone}}</td>
-                    <td>{{this.address}}</td>
-                    <td>{{this.type}}</td>
-                  </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-            </div>
-          </div>
+  <div class="row tm-content-row">
+    <div class="col-12 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <p class="text-white">Danh sách các tài khoản</p>
+
+        <!-- only admin type 1 can see -->
+        <select class="custom-select">
+          <option value="0">chọn tài khoản</option>
+          {{# each admins}}
+          <option value="{{this.id}}">{{{this.name}}}</option>
+          {{/each}}
+        </select> 
+
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ</th>
+              <th>Loại</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{# each admins}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.address}}</td>
+              <td>{{this.type}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- row -->
+  <div class="row tm-content-row">
+    <div class="tm-block-col tm-col-avatar">
+      <div class="tm-bg-primary-dark tm-block tm-block-avatar">
+        <h2 class="tm-block-title">Đổi ảnh đại diện</h2>
+        <div class="tm-avatar-container">
+          <img
+          src="img/avatar.png"
+          alt="Avatar"
+          class="tm-avatar img-fluid mb-4"
+          />
+          <a href="#" class="tm-avatar-delete-link">
+            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+          </a>
         </div>
-        <!-- row -->
-        <div class="row tm-content-row">
-          <div class="tm-block-col tm-col-avatar">
-            <div class="tm-bg-primary-dark tm-block tm-block-avatar">
-              <h2 class="tm-block-title">Đổi ảnh đại diện</h2>
-              <div class="tm-avatar-container">
-                <img
-                  src="img/avatar.png"
-                  alt="Avatar"
-                  class="tm-avatar img-fluid mb-4"
-                />
-                <a href="#" class="tm-avatar-delete-link">
-                  <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                </a>
-              </div>
-              <button class="btn btn-primary btn-block text-uppercase">
+              <!-- <button class="btn btn-primary btn-block text-uppercase">
                 Tải ảnh lên
-              </button>
+              </button> -->
+              
             </div>
           </div>
           <div class="tm-block-col tm-col-account-settings">
             <div class="tm-bg-primary-dark tm-block tm-block-settings">
               <h2 class="tm-block-title">Chỉnh sửa tài khoản</h2>
-              <form action="" class="tm-signup-form row">
-                <div class="form-group col-lg-6">
-                  <label for="name">Tên người dùng</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value="{{user.name}}"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value="{{user.email}}"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="password">Mật khẩu</label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="password2">Nhập lại mật khẩu</label>
-                  <input
-                    id="password2"
-                    name="password2"
-                    type="password"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="phone">Số điện thoại</label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value="{{user.phone}}"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="type">Loại admin</label>
-                  <input
-                    id="type"
-                    name="type"
-                    type="tel"
-                    value="{{user.type}}"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-12">
-                  <label for="address">Địa chỉ</label>
-                  <input
-                    id="address"
-                    name="address"
-                    type="text"
-                    value="{{user.address}}"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-12">
-                  <label class="tm-hide-sm">&nbsp;</label>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                  >
-                    Cập nhật
-                  </button>
-                </div>
-                <div class="col-12">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                  >
-                    Xóa tài khoản
-                  </button>
-                </div>
-              </form>
+              <!-- success msg -->
+              <!-- if success msg exists -->
+              {{#if success_msg}}
+              <!-- show success msg -->
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h1 style="font-size:20px;">{{success_msg}}</h1>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {{/if}}
+              <!-- end success msg -->
+
+              <!-- err msg -->
+              <!-- if err exists -->
+              {{#if err}}
+              <!-- each err -->
+              {{#each err}}
+              <!-- show err.msg -->
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <h1 style="font-size:20px;">{{this.msg}}</h1>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {{/each}}
+              {{/if}}
+              <!-- end err msg -->
+              <form 
+              action="/update" 
+              method="POST" 
+              class="tm-signup-form row"
+              >
+              <div class="form-group col-lg-6">
+                <label for="name">Tên người dùng (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="name"
+                name="name"
+                type="text"
+                value="{{user.name}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="email">Email (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="email"
+                name="email"
+                type="text"
+                value="{{user.email}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="password">Mật khẩu hiện tại (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="password"
+                name="password"
+                type="password"
+                class="form-control validate"
+                />
+              </div> 
+              <div class="form-group col-lg-6">
+                <label for="password1">Mật khẩu mới</label>
+                <input
+                id="password1"
+                name="password1"
+                type="password"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="password2">Nhập lại mật khẩu mới</label>
+                <input
+                id="password2"
+                name="password2"
+                type="password"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="phone">Số điện thoại (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="phone"
+                name="phone"
+                type="text"
+                value="{{user.phone}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="type">Loại admin (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="type"
+                name="type"
+                type="text"
+                value="{{user.type}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="img">Link ảnh đại diện (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="img"
+                name="img"
+                type="text"
+                value="{{user.img}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-12">
+                <label for="address">Địa chỉ (<span style="color:#F5A623;">*</span>)</label>
+                <input
+                id="address"
+                name="address"
+                type="text"
+                value="{{user.address}}"
+                class="form-control validate"
+                />
+              </div>
+              <div class="form-group col-lg-12">
+                <label class="tm-hide-sm">&nbsp;</label>
+                <button
+                type="submit"
+                class="btn btn-primary btn-block text-uppercase"
+                >
+                Cập nhật
+              </button>
             </div>
+            <div class="col-12">
+              <button
+              type="submit"
+              class="btn btn-primary btn-block text-uppercase"
+              >
+              Xóa tài khoản
+            </button>
           </div>
-        </div>
+        </form>
       </div>
-          <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
+    </div>
+  </div>
+</div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
