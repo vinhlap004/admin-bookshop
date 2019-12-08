@@ -12,7 +12,7 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {ti
 
 // POST login
 router.post('/login', passport.authenticate('local', {
-	successRedirect: '/',
+	successRedirect: '/account',
 	failureRedirect: '/login',
 	badRequestMessage: 'Bạn chưa điền đủ!',
 	//nếu ko có sẽ mặc định hiện "Missing credentials" khi nhập thiếu
@@ -20,10 +20,10 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 /* GET account page. */
-router.get('/accounts', ensureAuthenticated, (req, res) =>{
+router.get('/account', ensureAuthenticated, (req, res) =>{
 	admins.find()
 	.then(function(admin){
-		res.render('accounts', {
+		res.render('account', {
 			title : 'Tài khoản',
 			admins: admin,
 			user: res.locals.user
@@ -31,9 +31,34 @@ router.get('/accounts', ensureAuthenticated, (req, res) =>{
 	});
 });
 
+/* GET employees page. */
+router.get('/employees', ensureAuthenticated, (req, res) =>{
+	admins.find()
+	.then(function(admin){
+		if(req.user.type === 1){
+			res.render('employees', {
+				title : 'Tài khoản',
+				admins: admin,
+				user: res.locals.user
+			});
+		}else {
+			req.flash('error_msg', 'Bạn không được phép truy cập vào đây!');
+			res.redirect('/account');
+		}
+	});
+});
+
 
 /* GET sign up page. */
-router.get('/sign-up', (req, res) => res.render('sign-up', {title : 'Đăng ký', user: req.user}));
+router.get('/sign-up', ensureAuthenticated, (req, res) => {
+	console.log(req.user);
+	if(req.user.type === 1){
+		res.render('sign-up', {title : 'Tạo tài khoản', user: req.user});
+	}else {
+		req.flash('error_msg', 'Bạn không được phép truy cập vào đây!');
+		res.redirect('/account');
+	}
+});
 
 // POST sign up.
 router.post('/insert', function (req, res, next) {
@@ -106,7 +131,7 @@ router.post('/insert', function (req, res, next) {
 						newAdmin.save()
 						.then(admin => {
 							req.flash('success_msg', 'Bạn đã tạo tài khoản thành công hãy đăng nhập');
-							res.redirect('/login');
+							res.redirect('/sign-up');
 						})
 						.catch(er => console.log(er));
 					});
@@ -144,7 +169,7 @@ router.post('/update', function (req, res, next) {
 		err.push({msg: 'Số điện thoại không hợp lệ!'});
 	}
 	if (err.length > 0) {
-		res.render('accounts', {
+		res.render('account', {
 			//save data khi nhập sai
 			err,
 			name, 
@@ -163,11 +188,11 @@ router.post('/update', function (req, res, next) {
 			//console.log(user.email+" 2");//email local
 			//nếu email khác với email trong local mà khi kiểm tra nó thấy tồn tại trong database thì email đó đã tồn tại 
 			if (email !== user.eamil && check_email) {
-				console.log(check_email);
+				//console.log(check_email);
 				err.push({ msg: 'Email đã tồn tại!' });
 			}	
 			if (err.length > 0) {
-				res.render('accounts', {
+				res.render('account', {
 					//save data khi nhập sai
 					err,
 					name, 
@@ -183,7 +208,7 @@ router.post('/update', function (req, res, next) {
        	 			if (err1) throw err1;
        	 			if (!isMatch) {
        	 				err.push({msg: 'Mật khẩu không đúng!'});
-       	 				res.render('accounts', {
+       	 				res.render('account', {
 							//save data khi nhập sai
 							err,
 							name,
@@ -202,7 +227,7 @@ router.post('/update', function (req, res, next) {
        	 				user.save()
        	 				.then(admin => {
        	 					req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
-       	 					res.redirect('/accounts');
+       	 					res.redirect('/account');
        	 				})
        	 				.catch(er => console.log(er));
        	 			}
@@ -229,7 +254,7 @@ router.post('/update', function (req, res, next) {
 			err.push({msg: 'Mật khẩu mới nhập lại không đúng!'});
 		}
 		if (err.length > 0) {
-			res.render('accounts', {
+			res.render('account', {
 				//save data khi nhập sai
 				err,
 				name, 
@@ -250,7 +275,7 @@ router.post('/update', function (req, res, next) {
 					err.push({ msg: 'Email đã tồn tại!' });
 				}
 				if (err.length > 0) {
-					res.render('accounts', {
+					res.render('account', {
 						//save data khi nhập sai
 						err,
 						name, 
@@ -267,7 +292,7 @@ router.post('/update', function (req, res, next) {
        	 				if (err1) throw err1;
        	 				if (!isMatch) {
        	 					err.push({msg: 'Mật khẩu không đúng!'});
-       	 					res.render('accounts', {
+       	 					res.render('account', {
 								//save data khi nhập sai
 								err,
 								name,
@@ -291,7 +316,7 @@ router.post('/update', function (req, res, next) {
 									user.save()
 									.then(admin => {
 										req.flash('success_msg', 'Bạn đã cập nhật tài khoản thành công');
-										res.redirect('/accounts');
+										res.redirect('/account');
 									})
 									.catch(er => console.log(er));
 								});

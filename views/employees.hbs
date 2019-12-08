@@ -1,0 +1,45 @@
+<div class="container mt-5"
+  <div class="row tm-content-row">
+    <div class="col-12 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <p class="text-white">Danh sách các tài khoản</p>
+
+        <!-- only admin type 1 can see -->
+        <select class="custom-select">
+          <option value="0">chọn tài khoản</option>
+          {{# each admins}}
+          <option value="{{this.id}}">{{{this.name}}}</option>
+          {{/each}}
+        </select> 
+
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ</th>
+              <th>Loại</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{# each admins}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.address}}</td>
+              <td>{{this.type}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+s</div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->

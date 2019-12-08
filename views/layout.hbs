@@ -19,62 +19,83 @@
   <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
-	-->
+-->
 </head>
 
 <body>
   <div class="" id="home">
     <nav class="navbar navbar-expand-xl">
       <div class="container h-100">
-        <a class="navbar-brand" href="/">
-          <h1 class="tm-site-title mb-0">Quản lí sản phẩm</h1>
+        <a class="navbar-brand">
+          <!-- <h1 class="tm-site-title mb-0">Quản lý</h1> -->
         </a>
         <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-bars tm-nav-icon"></i>
-        </button>
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars tm-nav-icon"></i>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto h-100">
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="fas fa-tachometer-alt"></i>
-                Trang chủ
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto h-100">
 
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-file-alt"></i>
-                <span>
-                  Báo cáo <i class="fas fa-angle-down"></i>
-                </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="day">Báo cáo hàng ngày</a>
-                <a class="dropdown-item" href="week">Báo cáo tuần</a>
-                <a class="dropdown-item" href="month">Báo cáo tháng</a>
-                <a class="dropdown-item" href="quarter">Báo cáo quý</a>
-                <a class="dropdown-item" href="year">Báo cáo năm</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products">
-                <i class="fas fa-shopping-cart"></i>
-                Sản phẩm
-              </a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="fas fa-tachometer-alt"></i>
+              Trang chủ
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-file-alt"></i>
+            <span>
+              Báo cáo <i class="fas fa-angle-down"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="day">Báo cáo hàng ngày</a>
+            <a class="dropdown-item" href="week">Báo cáo tuần</a>
+            <a class="dropdown-item" href="month">Báo cáo tháng</a>
+            <a class="dropdown-item" href="quarter">Báo cáo quý</a>
+            <a class="dropdown-item" href="year">Báo cáo năm</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="employees">
+            <i class="fas fa-users"></i>
+            Nhân viên
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sign-up">
+            <i class="fas fa-user-plus"></i>
+            Tạo tài khoản
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products">
+            <i class="fas fa-shopping-cart"></i>
+            Sản phẩm
+          </a>
+        </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="accounts">
-                <i class="far fa-user"></i>
-                Tài khoản
-              </a>
-            </li>
-            <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-receipt"></i>
+            Đơn hàng
+          </a>
+        </li>
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="account">
+            <i class="far fa-user"></i>
+            Tài khoản
+          </a>
+        </li>
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog"></i>
@@ -84,14 +105,13 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/login">Đăng nhập</a>
-                <a class="dropdown-item" href="/sign-up">Tạo tài khoản</a>
               </div>
-            </li>
+            </li> -->
           </ul>
           <ul class="navbar-nav">
             {{#if user.name}}
             <li class="nav-item">
-              <a href="/accounts" class="nav-link d-block">
+              <a href="/account" class="nav-link d-block">
                 Chào {{user.name}}
               </a>
             </li>
@@ -103,14 +123,14 @@
             {{else}}
             <li class="nav-item">
               <a href="login" class="nav-link d-block">
-              Đăng nhập
+                Đăng nhập
               </a>
             </li>
-            <li class="nav-item">
+<!--             <li class="nav-item">
               <a href="sign-up" class="nav-link d-block">
               Tạo tài khoản
               </a>
-            </li>
+            </li> -->
             {{/if}}
 <!-- 
 
@@ -124,6 +144,48 @@
       </div>
 
     </nav>
+    <br>
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="msg col-lg-6">
+        <!-- success msg -->
+        <!-- if success msg exists -->
+        {{#if success_msg}}
+        <!-- show success msg -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{success_msg}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {{/if}}
+        <!-- end success msg -->
+        <!-- error msg -->
+        <!-- if err exists -->
+        {{#if error_msg }}
+        <!-- show error_msg  -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{error_msg}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {{/if}}
+        <!-- end error msg -->
+        <!-- error -->
+        <!-- if err exists -->
+        {{#if error }}
+        <!-- show error  -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <h1 style="font-size:20px;">{{error}}</h1>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {{/if}}
+        <!-- end error -->
+      </div>
+    </div>
     {{{body}}}
   </div>
 

@@ -1,7 +1,8 @@
 <div class="container mt-5">
     <div class="row tm-content-row">
-        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+        <div class="col-sm-12 col-md-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Danh sách sản phẩm</h2>
                 <div class="tm-product-table-container">
                     <table class="table table-hover tm-table-small tm-product-table">
                         <thead>
@@ -19,7 +20,7 @@
                             {{# each items}}
                             <tr>
                                 <th scope="row"><input type="checkbox" /></th>
-                                <td>{{this.title}}</td>
+                                <td class="tm-product-name">{{this.title}}</td>
                                 <td>{{this.price}}</td>
                                 <td>{{this.author}}</td>
                                 <td>
@@ -44,15 +45,26 @@
                 </button>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+        <div class="col-sm-12 col-md-12 col-lg-6 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
                 <h2 class="tm-block-title">Danh mục sản phẩm</h2>
                 <div class="tm-product-table-container">
                     <table class="table tm-table-small tm-product-table">
                         <tbody>
+                            <thead>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col">Mã danh mục</th>
+                                    <th scope="col">Tên danh muc</th>
+                                    <!-- <th scope="col">Số lượng</th> -->
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
                             {{# each categories}}
                             <tr>
-                                <td class="tm-product-name">{{this.categories}}</td>
+                                <th scope="row"><input type="checkbox" /></th>
+                                <td class="tm-categories-name">{{this.categoriesID}}</td>
+                                <td class="tm-categories-name">{{this.categories}}</td>
                                 <td class="text-center">
                                     <a href="#" class="tm-product-delete-link">
                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
@@ -64,8 +76,46 @@
                     </table>
                 </div>
                 <!-- table container -->
+                <a href="add-product" class="btn btn-primary btn-block text-uppercase mb-3">Thêm danh mục</a>
                 <button class="btn btn-primary btn-block text-uppercase mb-3">
-                    Thêm danh mục
+                    Xóa danh mục đã chọn
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Nhà xuất bản</h2>
+                <div class="tm-product-table-container">
+                    <table class="table tm-table-small tm-product-table">
+                        <tbody>
+                            <thead>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col">Mã NXB</th>
+                                    <th scope="col">Tên NXB</th>
+                                    <!-- <th scope="col">Số lượng</th> -->
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            {{# each publish}}
+                            <tr>
+                                <th scope="row"><input type="checkbox" /></th>
+                                <td class="tm-publish-name">{{this.publisherID}}</td>
+                                <td class="tm-publish-name">{{this.publisher}}</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{/ each}}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table container -->
+                <a href="add-product" class="btn btn-primary btn-block text-uppercase mb-3">Thêm nhà xuất bản</a>
+                <button class="btn btn-primary btn-block text-uppercase mb-3">
+                    Xóa nhà xuất bản được chọn
                 </button>
             </div>
         </div>
@@ -78,6 +128,16 @@
 <script>
     $(function () {
         $(".tm-product-name").on("click", function () {
+            window.location.href = "edit-product";
+        });
+    });    
+    $(function () {
+        $(".tm-categories-name").on("click", function () {
+            window.location.href = "edit-product";
+        });
+    });    
+    $(function () {
+        $(".tm-publish-name").on("click", function () {
             window.location.href = "edit-product";
         });
     });
