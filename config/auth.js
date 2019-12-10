@@ -2,7 +2,7 @@ module.exports = {
   //var check_user = res.locals.user;
  //console.log(user);
   ensureAuthenticated: function(req, res, next) {
-    console.log(req.user);
+    //console.log(req.user);
     if (!req.user) {
       //nếu ko tồn tại xác thực thì bắt đăng nhập
       req.flash('error_msg', 'Bạn không được phép truy cập vào đây!');

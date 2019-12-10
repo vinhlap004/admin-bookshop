@@ -14,6 +14,11 @@ var productRouter = require('./routes/product');
 
 var app = express();
 
+//2.connect
+mongoose.connect(process.env.DB_HOST,{useNewUrlParser:true,useUnifiedTopology: true })
+.then(()=>console.log('Connected to database\n'))
+.catch(err=>console.log(err));
+
 // Passport Config
 require('./config/passport')(passport);
 
