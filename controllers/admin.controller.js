@@ -60,23 +60,23 @@ module.exports.insert = function (req, res, next) {
 	//check requied fields
 	if (!name || !email || ! password || !password1 || !phone || !address||!type) {
 		err.push({msg: 'Bạn chưa điền hết thông tin yêu cầu!'});
-		console.log(err);
+		//console.log(err);
 	} 
 	//check email 
-	if (email.search("@") == -1) {
+	else if (email.search("@") == -1) {
 		err.push({msg: 'Email phải có ký tự "@"!'});
 	} 
 	//check password match
-	if (password !== password1) {
+	else if (password !== password1) {
 		err.push({msg: 'Mật khẩu nhập lại không đúng!'});
 	}
 	//check password length
-	if (password.length < 7) {
+	else if (password.length < 7) {
 		err.push({msg: 'Mật khẩu phải trên 6 ký tự!'});
 	} 
 	//check phone number
-	if(parseInt(phone)<=0 || isNaN(parseInt(phone))){
-		showError("Số điện thoại không hợp lệ!");
+	else if(parseInt(phone)<=0 || isNaN(parseInt(phone))){
+		err.push("Số điện thoại không hợp lệ!");
 		return false;
 	}
 	if (err.length > 0) {
@@ -261,7 +261,7 @@ module.exports.update = function (req, res, next) {
 			admins.findOne({email: user.email})
 			.then(check_email => {
 				//nếu email khác với email trong local mà khi kiểm tra nó thấy tồn tại trong database thì email đó đã tồn tại 
-				if (email !== user.eamil && check_email) {
+				if (email !== user.email && check_email) {
 					err.push({ msg: 'Email đã tồn tại!' });
 				}
 				if (err.length > 0) {
