@@ -13,23 +13,17 @@
                                 <th scope="col">Tác giả</th>
                                 <!-- <th scope="col">Số lượng</th> -->
                                 <th scope="col">&nbsp;</th>
-                                <th scope="col">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{# each items}}
                             <tr>
                                 <th scope="row"><input type="checkbox" /></th>
-                                <td class="tm-product-name">{{this.title}}</td>
+                                <td class="tm-product-name"><a href="/edit-product?id={{this.id}}" style="color:white;">{{this.title}}</a></td>
                                 <td>{{this.price}}</td>
                                 <td>{{this.author}}</td>
                                 <td>
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-eye tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="#" class="tm-product-delete-link">
+                                    <a href="/product-delete?id={{this.id}}" class="tm-product-delete-link">
                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                     </a>
                                 </td>
@@ -125,7 +119,7 @@
 <!-- https://jquery.com/download/ -->
 <script src="js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
-<script>
+<!-- <script>
     $(function () {
         $(".tm-product-name").on("click", function () {
             window.location.href = "edit-product";
@@ -141,4 +135,4 @@
             window.location.href = "edit-product";
         });
     });
-</script>
+</script> -->

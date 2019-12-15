@@ -37,5 +37,25 @@ router.get('/logout', controllerUser.logout);
 /* GET forget password page. */
 router.get('/forget-password', controllerUser.forgetPassword);
 
+/* GET User page. */
+router.get('/show-user', function (req, res, next) {
+
+	admins.findById(req.query.id, function (err, userData) {
+		console.log(userData);
+		if (err) {
+			console.log("Can't show data\n");
+			res.sendStatus(500);
+		} else {
+			res.render('show-user', {title : 'Thông tin nhân viên', data: userData});
+		}
+	})
+});
+
+/* GET delete page. */
+router.get('/delete', function (req, res, next) {
+	admins.findByIdAndRemove(req.query.id, (err) => {
+		res.redirect('/employees');
+	});
+});
 
 module.exports = router;

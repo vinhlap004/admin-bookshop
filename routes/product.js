@@ -22,4 +22,12 @@ router.get('/add-product', controllerProduct.addProduct);
 /* GET edit-product page. */
 router.get('/edit-product', controllerProduct.editProduct);
 
+
+/* GET product delete page. */
+router.get('/product-delete', function (req, res, next) {
+	products.findByIdAndRemove(req.query.id, (err) => {
+		res.redirect('/products');
+	});
+});
+
 module.exports = router;
