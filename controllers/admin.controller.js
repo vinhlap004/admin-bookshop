@@ -150,12 +150,12 @@ module.exports.update = function (req, res, next) {
 	} 
 	//check email 
 
-	if (email.search("@") == -1) {
+	else if (email.search("@") == -1) {
 		err.push({msg: 'Email phải có ký tự "@"!'});
 	} 
 
 	//check phone number
-	if(parseInt(phone)<=0 || isNaN(parseInt(phone))){
+	else if(parseInt(phone)<=0 || isNaN(parseInt(phone))){
 		err.push({msg: 'Số điện thoại không hợp lệ!'});
 	}
 	if (err.length > 0) {
