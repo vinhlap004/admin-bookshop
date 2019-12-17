@@ -29,21 +29,11 @@ module.exports.addProduct = (req, res, next) => {
 }
 
 module.exports.editProduct = (req, res, next) => {
-	products.findById(req.query.id, function (err, dataProduct) {
-		console.log(dataProduct);
-		if (err) {
-			console.log("Can't show item\n");
-			res.sendStatus(500);
-		} else {
-			categories.find().sort('categories')
-			.then(function (category) {
-				console.log(category);
-				publishers.find().sort('publisher')
-				.then(function (publisher) {
-					console.log(publisher);
-					res.render('edit-product', {title : 'Chỉnh sửa sản phẩm', item: dataProduct, publisher: publisher, category: category});
-				})
-			})
-		}
-	})
+	const[dataProduct,publisher,category]= 
+	await Promise.all([products.findById(req.query.id),
+		publishers.find().sort('publisher'),
+		categories.find().sort('categories')
+	]);
+
+	res.render('edit-product', {title : 'Chỉnh sửa sản phẩm', item: dataProduct, publisher: publisher, category: category});
 }
